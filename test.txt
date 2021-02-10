@@ -1,0 +1,4 @@
+    FILE_TO_OPEN = os.getenv("FILE_TO_OPEN", os.path.join(".", "test.txt"))
+
+
+Timestamp: 2021-02-10 13:18:25.762781
