@@ -6,7 +6,7 @@ Contains Robocorp Robot which automates Windows Notepad.
 
 ## Robot steps
   
-  1. open test.txt from current file and expect that it is opened by Notepad (as .txt associated application)
+  1. open test.txt from current directory and expect that it is opened by Notepad (as .txt associated application)
   2. change font settings
   3. clear existing text
   4. copy text from clipboard into editor
