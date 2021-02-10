@@ -2,6 +2,8 @@
 
 Contains Robocorp Robot which automates Windows Notepad.
 
+**explanation.** _"Robocorp Robot"_ means directory structure which is runnable with **rcc** tool (link at the bottom).
+
 ## Robot steps
   
   1. open test.txt from current file and expect that it is opened by Notepad (as .txt associated application)
@@ -31,5 +33,6 @@ Contains Robocorp Robot which automates Windows Notepad.
   
 ## Links
 
-  - [RCC](https://github.com/robocorp/rcc)
-  - [Desktop automation](https://robocorp.com/docs/development-guide/desktop)
+  - [RCC](https://github.com/robocorp/rcc) (Github)
+  - [RCC overview](https://robocorp.com/docs/rcc/overview) (Docs)
+  - [Desktop automation](https://robocorp.com/docs/development-guide/desktop) (Docs)
