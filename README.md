@@ -2,7 +2,7 @@
 
 Contains Robocorp Robot which automates Windows Notepad.
 
-**explanation.** _"Robocorp Robot"_ means directory structure which is runnable with **rcc** tool (link at the bottom).
+**explanation.** _"Robocorp Robot"_ means directory structure which is runnable with **rcc** tool (link at the bottom)
 
 ## Robot steps
   
