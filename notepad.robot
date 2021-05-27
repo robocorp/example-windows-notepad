@@ -2,6 +2,7 @@
 Documentation     Copy text from clipboard to Notepad and change font settings.
 Library           String
 Library           RPA.Desktop.Windows
+Library           RPA.FileSystem
 
 *** Keywords ***
 Format Text
@@ -38,6 +39,14 @@ Save and Exit
     Sleep    1s    # For demo purpose
     Menu Select    File->Exit
 
+Take Screenshot
+    Screenshot  screenshot.png  desktop=True
+    Move File  output/images/screenshot.png  output/screenshot.png
+
+Run Teardown
+    Run Keyword If Test Failed    Take Screenshot
+    Close All Applications
+
 *** Tasks ***
 Notepad Font menu
     Set Task Variable    ${workfile}    %{FILE_TO_OPEN=test.txt}
@@ -47,4 +56,4 @@ Notepad Font menu
     Send Keys    ^v{ENTER}
     Write Notepad Message    \nTimestamp: ${{ datetime.datetime.now() }}\n
     Save and Exit
-    [Teardown]    Close All Applications
+    [Teardown]   Run Teardown
