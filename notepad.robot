@@ -18,6 +18,7 @@ Change Font Settings
     Set Task Variable    ${fontstyle}    %{NOTEPAD_FONT_STYLE=Regular}
     Menu Select    Format->Font
     Refresh Window    # because UI changed
+    Wait For Element  name:\'Font style:\' and type:Edit
     Mouse Click    name:\'Font style:\' and type:Edit
     Send Keys    ${fontstyle}
     Mouse Click    name:Size: and class:Edit
