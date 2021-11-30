@@ -40,12 +40,8 @@ Save and Exit
     Sleep    1s    # For demo purpose
     Menu Select    File->Exit
 
-Take Screenshot
-    Screenshot  screenshot.png  desktop=True
-    Move File  output/images/screenshot.png  output/screenshot.png
-
 Run Teardown
-    Run Keyword If Test Failed    Take Screenshot
+    Run Keyword If Test Failed    Screenshot  output/fail.png  desktop=True
     Close All Applications
 
 *** Tasks ***
@@ -56,5 +52,6 @@ Notepad Font menu
     Write Notepad Message    ^a{VK_CLEAR}    # Clear Notepad editor
     Send Keys    ^v{ENTER}
     Write Notepad Message    \nTimestamp: ${{ datetime.datetime.now() }}\n
+    Screenshot  output/success.png  desktop=True
     Save and Exit
     [Teardown]   Run Teardown
