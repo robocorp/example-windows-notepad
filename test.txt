@@ -1,4 +1,3 @@
-    FILE_TO_OPEN = os.getenv("FILE_TO_OPEN", os.path.join(".", "test.txt"))
+robocorp/example-windows-notepad
 
-
-Timestamp: 2021-02-10 13:18:25.762781
+Timestamp: 2021-11-30 16:46:10.218300
