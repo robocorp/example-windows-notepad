@@ -1,7 +1,7 @@
 tasks:
-  Notepad With RFW:
+  Notepad with Robot Framework:
     robotTaskName: Notepad Font menu
-  Notepad With Python:
+  Notepad with Python:
     shell: python notepad.py
 
 condaConfigFile: conda.yaml

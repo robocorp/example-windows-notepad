@@ -1,6 +1,5 @@
 import datetime
 import os
-from time import sleep
 from RPA.Desktop.Windows import Windows
 
 windows = Windows()
