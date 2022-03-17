@@ -22,7 +22,7 @@ Contains Robocorp Robot which automates Windows Notepad.
 ## Running Robot with the Robot Framework syntax
 
   ```shell
-  > rcc run -t "Notepad with RFW"
+  > rcc run -t "Notepad with Robot Framework"
   ``` 
   
 ## Running Robot with the Python syntax
