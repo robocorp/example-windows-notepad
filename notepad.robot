@@ -1,60 +1,49 @@
 *** Settings ***
-Documentation     Copy text from clipboard to Notepad and change font settings.
+Documentation     Automate Notepad.
+...               Expects Windows 10, English.
+Library           RPA.Windows
 Library           String
-Library           RPA.Desktop.Windows
-Library           RPA.FileSystem
+Task Teardown     Close Current Window
 
-*** Keywords ***
-Format text
-    [Arguments]    ${text}
-    ${text}=    Replace String    ${text}    ${SPACE}    {VK_SPACE}
-    ${text}=    Replace String    ${text}    \n    {ENTER}
-    [Return]    ${text}
-
-*** Keywords ***
-Change font settings
-    Set Task Variable    ${fontname}    %{NOTEPAD_FONT_NAME=Times New Roman}
-    Set Task Variable    ${fontsize}    %{NOTEPAD_FONT_SIZE=12}
-    Set Task Variable    ${fontstyle}    %{NOTEPAD_FONT_STYLE=Regular}
-    Menu Select    Format->Font
-    Refresh Window    # because UI changed
-    Wait For Element    name:\'Font style:\' and type:Edit
-    Mouse Click    name:\'Font style:\' and type:Edit
-    Send Keys    ${fontstyle}
-    Mouse Click    name:Size: and class:Edit
-    Send Keys    ${fontsize}
-    ${fontname}=    Format Text    ${fontname}
-    Send Keys    %f${fontname}
-    Mouse Click    name:OK and type:Button
-    Wait For Element    class:Edit
-
-*** Keywords ***
-Write Notepad message
-    [Arguments]    ${message}
-    ${message}=    Format Text    ${message}
-    Type Into    class:Edit    ${message}
-
-*** Keywords ***
-Save and exit
-    Menu Select    File->Save
-    Sleep    1s    # For demo purpose
-    Menu Select    File->Exit
-
-Run teardown
-    Run Keyword If Test Failed
-    ...    Screenshot
-    ...    ${OUTPUT_DIR}${/}fail.png
-    ...    desktop=True
-    Close All Applications
+*** Variables ***
+${DEFAULT_TEST_FILE}=    ${CURDIR}${/}test.txt
 
 *** Tasks ***
-Notepad Font menu
-    Set Task Variable    ${workfile}    %{FILE_TO_OPEN=test.txt}
-    Open File    ${workfile}    Notepad    wildcard=True
+Automate Notepad
+    Open Notepad
     Change font settings
-    Write Notepad message    ^a{VK_CLEAR}    # Clear Notepad editor
-    Send Keys    ^v{ENTER}
-    Write Notepad message    \nTimestamp: ${{ datetime.datetime.now() }}\n
-    Screenshot    output/success.png    desktop=True
-    Save and exit
-    [Teardown]    Run Teardown
+    Write text to editor    {CTRL}a{CLEAR}    # Clear text
+    Write text to editor    Timestamp: ${{ datetime.datetime.now() }}
+    Save
+
+*** Keywords ***
+Open Notepad
+    Windows Run    notepad.exe %{FILE_TO_OPEN=${DEFAULT_TEST_FILE}}
+    Control Window    type:WindowControl class:Notepad
+
+Change font settings
+    Open font settings
+    Set font
+    Set font style
+    Set font size
+    Click    id:1    # OK
+
+Open font settings
+    Click    type:MenuItemControl name:Format
+    Click    type:MenuItemControl name:Font...
+
+Set font
+    Select    id:1136    %{NOTEPAD_FONT_NAME=Times New Roman}
+
+Set font style
+    Select    id:1137    %{NOTEPAD_FONT_STYLE=Regular}
+
+Set font size
+    Select    id:1138    %{NOTEPAD_FONT_SIZE=12}
+
+Write text to editor
+    [Arguments]    ${text}
+    Send Keys    id:15    ${text}    # Text Editor
+
+Save
+    Send Keys    keys={CTRL}s

@@ -1,6 +1,6 @@
 tasks:
   Notepad with Robot Framework:
-    robotTaskName: Notepad Font menu
+    robotTaskName: Automate Notepad
   Notepad with Python:
     shell: python notepad.py
 

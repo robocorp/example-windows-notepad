@@ -1,20 +1,20 @@
-# example-windows-notepad
+# Windows Notepad automation
 
-Contains Robocorp Robot which automates Windows Notepad.
+Contains a Robocorp robot which automates Windows Notepad.
 
-**explanation.** _"Robocorp Robot"_ means directory structure which is runnable with **rcc** tool (link at the bottom)
+**Explanation.** _"Robocorp Robot"_ means a directory structure which is runnable with [RCC](https://github.com/robocorp/rcc).
 
 ## Robot steps
   
-  1. open test.txt from current directory and expect that it is opened by Notepad (as .txt associated application)
-  2. change font settings
-  3. clear existing text
-  4. copy text from clipboard into editor
-  5. save and exit
+  1. Open test.txt from current directory in Notepad.
+  2. Change font settings.
+  3. Clear existing text.
+  4. Write text into the editor.
+  5. Save and exit.
   
 ## Configuring run with environment variables
 
-  - **FILE_TO_OPEN** (absolute filepath to file, defaults to current directory's _test.txt_)
+  - **FILE_TO_OPEN** (an absolute filepath to file, defaults to current directory's _test.txt_)
   - **NOTEPAD_FONT_NAME** (default with Python is _Comic Sans MS_ and with RFW _Times New roman_)
   - **NOTEPAD_FONT_SIZE** (default is _18_)
   - **NOTEPAD_FONT_STYLE** (default is _Regular_)

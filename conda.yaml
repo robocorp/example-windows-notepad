@@ -6,3 +6,4 @@ dependencies:
   - pip=20.1
   - pip:
     - rpaframework==12.9.0
+    - rpaframework-windows==2.3.2
