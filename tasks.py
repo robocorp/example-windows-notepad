@@ -5,14 +5,15 @@ from pathlib import Path
 
 from robocorp import windows
 from robocorp.tasks import setup, task
-from robocorp.windows import WindowElement
 
 
 desktop = windows.Desktop()
 window = None  # Notepad window object after being controlled
 
 LOCATOR_NOTEPAD = 'class:"Notepad" subname:"Notepad"'
-OPEN_FILE = str(os.getenv("FILE_TO_OPEN", Path("devdata") / "test.txt").absolute())
+TEXT_FILE = str(os.getenv("FILE_TO_OPEN", Path("devdata") / "test.txt").absolute())
+WINDOWS_10_VERSION = "10"
+WINDOWS_11_BUILD = 22000
 
 
 def get_win_version() -> str:
@@ -21,7 +22,7 @@ def get_win_version() -> str:
     #  number. (the same applies for `platform.version()`)
     version_parts = platform.version().split(".")
     major = version_parts[0]
-    if major == "10" and int(version_parts[2]) >= 22000:
+    if major == WINDOWS_10_VERSION and int(version_parts[2]) >= WINDOWS_11_BUILD:
         major = "11"
 
     return major
@@ -30,7 +31,7 @@ def get_win_version() -> str:
 @setup
 def open_notepad(task):
     """Opens Notepad for automation, then closes it at the end."""
-    desktop.windows_run(f"notepad.exe {OPEN_FILE}")
+    desktop.windows_run(f"notepad.exe {TEXT_FILE}")
     yield
     desktop.close_windows(LOCATOR_NOTEPAD)
 
@@ -44,7 +45,7 @@ def _set_property(unique_id: str, value: str):
 
 def _select_property(unique_id: str, value: str):
     field = window.find(f'id:"{unique_id}"')
-    field.ui_automation_control.Select(value)
+    field.select(value)
 
 
 def change_font_settings():
