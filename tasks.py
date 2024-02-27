@@ -17,20 +17,6 @@ FONT_STYLE = os.getenv("NOTEPAD_FONT_STYLE", "Regular")
 FONT_SIZE = os.getenv("NOTEPAD_FONT_SIZE", "12")
 
 
-def get_win_version() -> str:
-    """Windows only utility which returns the current Windows major version."""
-    # Windows terminal `ver` command is bugged, until that's fixed, check by build
-    #  number. (the same applies for `platform.version()`)
-    WINDOWS_10_VERSION = "10"
-    WINDOWS_11_BUILD = 22000
-    version_parts = platform.version().split(".")
-    major = version_parts[0]
-    if major == WINDOWS_10_VERSION and int(version_parts[2]) >= WINDOWS_11_BUILD:
-        major = "11"
-
-    return major
-
-
 @setup
 def open_close_notepad(task):
     """Opens Notepad for automation, then closes it at the end."""
@@ -52,7 +38,7 @@ def _select_property(unique_id: str, value: str):
 
 
 def change_font_settings(family: str, style: str, size: str):
-    ver = get_win_version()  # slightly different automation based on Windows version
+    ver = desktop.get_win_version()  # slightly different automation based on Windows version
 
     # Opens the Edit menu and goes into Font.
     if ver == "11":
